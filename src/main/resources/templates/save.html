@@ -1,47 +1,48 @@
 <!DOCTYPE html>
-<html lang="es">
-  <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Administracion Personas</title>
-      <!-- Estilos CSS -->
-      <link rel="stylesheet" href="../static/style.css" />
-      <!-- Bootstrap CSS -->
-      <link
-        rel="stylesheet"
-        href="../static/Bootstrap/css/bootstrap.min.css"
-        th:href="@{/css/bootstrap.min.css}"
-      />
-    </head>
-    <body>
-      <div class="container">
-        <form
-          action="#"
-          th:action="@{/save}"
-          class="form-group"
-          th:object="{persona}"
-          method="post"
-        >
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Agregar Personas</title>
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}"/>
+    <!-- Bootstrap CSS -->
+    <link
+            href="../static/bootstrap/css/bootstrap.min.css"
+            rel="stylesheet"
+            th:href="@{/bootstrap/css/bootstrap.min.css}"
+    />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+<div class="container">
+    <br/>
+    <h2>Agregar Persona</h2>
+    <form
+            action="#"
+            th:action="@{/save}"
+            class="form-group"
+            th:object="${persona}"
+            method="post"
+    >
+        <input type="hidden" class="form-control" id="id" th:field="*{id}" name="id">
         <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" class="form-control" id="nombre" name="nombre">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" name="nombre" required>
         </div>
         <div class="form-group">
-          <label for="apellido">Apellido</label>
-          <input type="text" class="form-control" id="apellido" name="apellido">
+            <label for="apellido">Apellido</label>
+            <input type="text" class="form-control" id="apellido" th:field="*{apellido}" name="apellido" required>
         </div>
         <div class="form-group">
-          <label for="direccion">Direccion</label>
-          <input type="text" class="form-control" id="direccion" name="direccion">
+            <label for="direccion">Direccion</label>
+            <input type="text" class="form-control" id="direccion" th:field="*{direccion}" name="direccion">
         </div>
         <div class="form-group">
-          <label for="telefono">Telefono</label>
-          <input type="text" class="form-control" id="telefono" name="telefono">
+            <label for="telefono">Telefono</label>
+            <input type="text" class="form-control" id="telefono" th:field="*{telefono}" name="telefono">
         </div>
         <button type="submit" class="btn btn-success">Guardar</button>
-      </form>
-      </div>
-    </body>
-  </html>
+    </form>
+</div>
+</body>
 </html>

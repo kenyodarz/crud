@@ -7,7 +7,7 @@ interface GenericServiceAPI<T, ID: Serializable> {
 
     fun getAll(): List<T>
 
-    fun getOne(id: ID): T
+    fun getOne(id: ID): T?
 
     fun save(entity: T): T
 

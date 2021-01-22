@@ -14,7 +14,7 @@ abstract class GenericServiceImpl<T, ID : Serializable> : GenericServiceAPI<T, I
         return returnList
     }
 
-    override fun getOne(id: ID): T {
+    override fun getOne(id: ID): T? {
         // Usamos un Optional implementado en Java8
         val optional = getRepository().findById(id)
         //Retornamos nulo en caso de no encontrar el objeto

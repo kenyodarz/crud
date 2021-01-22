@@ -26,8 +26,13 @@ class PersonaController(serviceAPI: PersonaServiceAPI) {
 
     @GetMapping("/save/{id}")
     fun showSave(@PathVariable("id") id: Long, model: Model): String {
-        if (id != null) {
-            model.addAttribute("persona", serviceAPI.getOne(id))
+
+        val persona: Persona? = serviceAPI.getOne(id)
+
+        if (persona != null) {
+            model.addAttribute("persona", persona)
+        } else {
+            model.addAttribute("persona", Persona())
         }
         return "save"
     }
@@ -39,7 +44,7 @@ class PersonaController(serviceAPI: PersonaServiceAPI) {
     }
 
     @GetMapping("/delete/{id}")
-    fun delete(@PathVariable id: Long): String{
+    fun delete(@PathVariable id: Long): String {
         serviceAPI.delete(id)
         return "redirect:/"
     }

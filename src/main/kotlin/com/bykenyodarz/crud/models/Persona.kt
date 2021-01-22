@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank
 class Persona {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
     @Column

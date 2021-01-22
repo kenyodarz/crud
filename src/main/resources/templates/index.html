@@ -1,54 +1,58 @@
 <!DOCTYPE html>
-<html lang="es">
-  <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Administracion Personas</title>
-      <!-- Estilos CSS -->
-      <link rel="stylesheet" href="../static/style.css" />
-      <!-- Bootstrap CSS -->
-      <link
-        rel="stylesheet"
-        href="../static/Bootstrap/css/bootstrap.min.css"
-        th:href="@{/css/bootstrap.min.css}"
-      />
-    </head>
-    <body>
-      <div class="container">
-        <br />
-        <div>
-          <a href="/save/null" class="btn btn-primary">Agregar</a>
-        </div>
-        <div th:switch="${list}">
-          <h3 th:case="null">No hay personas</h3>
-          <div th:case="*">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Administración Personas</title>
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}"/>
+    <!-- Bootstrap CSS -->
+    <link
+            href="../static/bootstrap/css/bootstrap.min.css"
+            rel="stylesheet"
+            th:href="@{/bootstrap/css/bootstrap.min.css}"
+    />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+<div class="container">
+    <br/>
+    <div>
+        <a href="/save/-1" class="btn btn-primary">Agregar</a>
+    </div>
+    <div>
+        <h3 th:if="${list.isEmpty()}">No hay personas</h3>
+        <div th:if="${!list.isEmpty()}">
             <h2>Personas</h2>
             <table class="table">
-              <thead>
+                <thead>
                 <tr>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Direccion</th>
-                  <th>Telefono</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
-              </thead>
-              <tbody>
+                </thead>
+                <tbody>
                 <tr th:each="persona: ${list}">
-                  <td th:text="${persona.nombre}"></td>
-                  <td th:text="${persona.apellido}"></td>
-                  <td th:text="${persona.direccion}"></td>
-                  <td th:text="${persona.telefono}"></td>
-                  <td><a href="@{/save/{id}(id=persona.id)}"></a></td>
-                  <td><a href="@{/delete/{id}(id=persona.id)}"></a></td>
+                    <td th:text="${persona.nombre}"></td>
+                    <td th:text="${persona.apellido}"></td>
+                    <td th:text="${persona.direccion}"></td>
+                    <td th:text="${persona.telefono}"></td>
+                    <td><a th:href="@{/save/{id}(id=${persona.id})}" class="btn btn-warning">
+                        <i class="fas fa-edit"></i>
+                    </a></td>
+                    <td><a th:href="@{/delete/{id}(id=${persona.id})}" class="btn btn-danger">
+                        <i class="fas fa-trash"></i>
+                    </a></td>
                 </tr>
-              </tbody>
+                </tbody>
             </table>
-          </div>
         </div>
-      </div>
-    </body>
-  </html>
+    </div>
+</div>
+</body>
 </html>
+
