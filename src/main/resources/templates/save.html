@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <html xmlns:th="http://www.thymeleaf.org">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Administracion Personas</title>
+      <!-- Estilos CSS -->
+      <link rel="stylesheet" href="../static/style.css" />
+      <!-- Bootstrap CSS -->
+      <link
+        rel="stylesheet"
+        href="../static/Bootstrap/css/bootstrap.min.css"
+        th:href="@{/css/bootstrap.min.css}"
+      />
+    </head>
+    <body>
+      <div class="container">
+        <form
+          action="#"
+          th:action="@{/save}"
+          class="form-group"
+          th:object="{persona}"
+          method="post"
+        >
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombre" name="nombre">
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" class="form-control" id="apellido" name="apellido">
+        </div>
+        <div class="form-group">
+          <label for="direccion">Direccion</label>
+          <input type="text" class="form-control" id="direccion" name="direccion">
+        </div>
+        <div class="form-group">
+          <label for="telefono">Telefono</label>
+          <input type="text" class="form-control" id="telefono" name="telefono">
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+      </form>
+      </div>
+    </body>
+  </html>
+</html>
