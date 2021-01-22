@@ -31,6 +31,8 @@
                   <th>Apellido</th>
                   <th>Direccion</th>
                   <th>Telefono</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
                 </tr>
               </thead>
               <tbody>
@@ -39,6 +41,8 @@
                   <td th:text="${persona.apellido}"></td>
                   <td th:text="${persona.direccion}"></td>
                   <td th:text="${persona.telefono}"></td>
+                  <td><a href="@{/save/{id}(id=persona.id)}"></a></td>
+                  <td><a href="@{/delete/{id}(id=persona.id)}"></a></td>
                 </tr>
               </tbody>
             </table>

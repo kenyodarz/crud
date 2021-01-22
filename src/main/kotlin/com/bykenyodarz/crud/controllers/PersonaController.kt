@@ -38,6 +38,7 @@ class PersonaController(serviceAPI: PersonaServiceAPI) {
         return "redirect:/"
     }
 
+    @GetMapping("/delete/{id}")
     fun delete(@PathVariable id: Long): String{
         serviceAPI.delete(id)
         return "redirect:/"
