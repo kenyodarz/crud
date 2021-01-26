@@ -4,40 +4,36 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.BindingResult
 import org.springframework.validation.FieldError
+import org.springframework.web.bind.annotation.*
 import java.io.Serializable
-import java.util.function.Consumer
+import java.util.*
 import javax.validation.Valid
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.PostMapping
-import java.util.HashMap
-import org.springframework.web.bind.annotation.RestController
+
 
 @RestController
-abstract class GenericRestController<T, ID : Serializable>(val serviceAPI: GenericServiceAPI<T, ID>){
+abstract class GenericRestController<T, ID : Serializable>(val serviceAPI: GenericServiceAPI<T, ID>) {
 
-    fun validar(result: BindingResult): ResponseEntity<Map<String, Any>> {
+    protected fun validar(result: BindingResult): ResponseEntity<*>? {
         val errores: MutableMap<String, Any> = HashMap()
-        result.fieldErrors.forEach(Consumer { err: FieldError ->
-            errores[err.field] = " El campo " + err.field + " " + err.defaultMessage
-        })
+        result.fieldErrors.forEach { err: FieldError ->
+            with(errores) { put(err.field, "El campo ${err.field}  ${err.defaultMessage}") }
+        }
         return ResponseEntity.badRequest().body(errores)
     }
 
     @GetMapping("/all")
-    fun getAll(): ResponseEntity<List<T>>{
+    fun getAll(): ResponseEntity<List<T>> {
         return ResponseEntity.ok(serviceAPI.getAll())
     }
 
     @GetMapping("/{id}")
-    fun getOne(@PathVariable id: ID): ResponseEntity<Any>{
+    fun getOne(@PathVariable id: ID): ResponseEntity<Any> {
         val entity: T = serviceAPI.getOne(id) ?: return ResponseEntity.notFound().build()
         return ResponseEntity.ok(entity!!)
     }
 
     @PostMapping("/save")
-    fun save(@RequestBody entity: @Valid T, result: BindingResult): ResponseEntity<*> {
+    fun save(@RequestBody @Valid entity: T, result: BindingResult): ResponseEntity<*>? {
         return if (result.hasErrors()) {
             validar(result)
         } else ResponseEntity.status(HttpStatus.OK).body(serviceAPI.save(entity))
@@ -49,9 +45,6 @@ abstract class GenericRestController<T, ID : Serializable>(val serviceAPI: Gener
         serviceAPI.delete(id)
         return ResponseEntity.ok(entity!!)
     }
-
-
-
 
 
 }
